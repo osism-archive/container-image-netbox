@@ -1,0 +1,35 @@
+---
+name: Update version
+
+"on":
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  update-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Setup python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Install ruamel.yaml
+        run: pip3 install ruamel.yaml
+
+      - name: Update version
+        uses: technote-space/create-pr-action@v2
+        with:
+          EXECUTE_COMMANDS: python3 .github/update-version.py
+          COMMIT_EMAIL: 'bot@osism.tech'
+          COMMIT_MESSAGE: |
+            chore: update version
+
+            Signed-off-by: OSISM Bot <bot@osism.tech>
+          COMMIT_NAME: 'OSISM Bot'
+          PR_BRANCH_NAME: 'update-version-${PR_ID}'
+          PR_TITLE: 'chore: update version'

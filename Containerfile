@@ -1,4 +1,4 @@
-ARG VERSION=v3.0.9-ldap
+ARG VERSION=v3.0.10-ldap
 FROM netboxcommunity/netbox:${VERSION}
 
 LABEL "org.opencontainers.image.documentation"="https://docs.osism.tech" \
